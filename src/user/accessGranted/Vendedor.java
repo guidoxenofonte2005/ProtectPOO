@@ -44,5 +44,6 @@ public class Vendedor extends Usuario {
     }
 
     public void sellingRate (Produtos produto, double total) {
+
     }
 }
