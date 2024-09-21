@@ -4,11 +4,13 @@ public class Produtos {
     private String nome;
     private double preco;
     private int quantidadeEmEstoque;
+    private int quantidadeVendida;
 
-    public Produtos (String nome, double preco, int quantidadeEmEstoque) {
+    public Produtos (String nome, double preco, int quantidadeEmEstoque, int quantidadeVendida) {
         this.nome = nome;
         this.preco = preco;
         this.quantidadeEmEstoque = quantidadeEmEstoque;
+        this.quantidadeEmEstoque = 0;
     }
 
     //Criando getters para retornar os atributos privados
@@ -19,9 +21,13 @@ public class Produtos {
     public double getPreco () {
         return preco;
     }
-    
+
     public int getQuantidadeEmEstoque () {
         return quantidadeEmEstoque;
+    }
+
+    public int getQuantidadeVendida () {
+        return quantidadeVendida;
     }
 
     //Criando setters
@@ -41,5 +47,18 @@ public class Produtos {
     public void setQuantidadeEmEstoque (int quantidadeEmEstoque) {
         this.quantidadeEmEstoque = quantidadeEmEstoque;
     }
-}   
 
+    public void registrarVenda (int quantidadeVendida) {
+        if (quantidadeVendida <= quantidadeEmEstoque) {
+            this.quantidadeVendida += quantidadeVendida;
+            this.quantidadeEmEstoque -= quantidadeVendida;
+        }
+        else {
+            System.out.println("Estoque insuficiente para realizar a venda");
+        }
+    }
+
+    public void reposicao (int quantidadeEmEstoque, int repor) {
+        this.quantidadeEmEstoque += repor;
+    }
+}
