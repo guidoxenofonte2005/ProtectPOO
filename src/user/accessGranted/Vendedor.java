@@ -14,6 +14,7 @@ public class Vendedor extends Usuario {
     @Override
     public void acessarSistema () {
     }
+
     @Override
     protected void criarConta () {
     }

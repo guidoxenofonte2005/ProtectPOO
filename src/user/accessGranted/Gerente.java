@@ -21,6 +21,7 @@ public class Gerente extends Usuario {
     }
     @Override
     protected void criarConta () {
+
     }
 
     public void criarVendedor() {
