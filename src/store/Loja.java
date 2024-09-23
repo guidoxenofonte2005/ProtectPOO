@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Loja {
 
-    private List <Produtos> produtos;
+    private List<Produtos> produtos;
 
     public Loja (List <Produtos> produto) {
         this.produtos = produto;

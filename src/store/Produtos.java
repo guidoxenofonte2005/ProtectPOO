@@ -6,7 +6,7 @@ public class Produtos {
     private int quantidadeEmEstoque;
     private int quantidadeVendida;
 
-    public Produtos (String nome, double preco, int quantidadeEmEstoque, int quantidadeVendida) {
+    public Produtos(String nome, double preco, int quantidadeEmEstoque, int quantidadeVendida) {
         this.nome = nome;
         this.preco = preco;
         this.quantidadeEmEstoque = quantidadeEmEstoque;
@@ -14,24 +14,24 @@ public class Produtos {
     }
 
     //Criando getters para retornar os atributos privados
-    public String getNome () {
+    public String getNome() {
         return nome;
     }
 
-    public double getPreco () {
+    public double getPreco() {
         return preco;
     }
 
-    public int getQuantidadeEmEstoque () {
+    public int getQuantidadeEmEstoque() {
         return quantidadeEmEstoque;
     }
 
-    public int getQuantidadeVendida () {
+    public int getQuantidadeVendida() {
         return quantidadeVendida;
     }
 
     //Criando setters
-    public void setNome (String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -44,7 +44,7 @@ public class Produtos {
         }
     }
 
-    public void setQuantidadeEmEstoque (int quantidadeEmEstoque) {
+    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
         this.quantidadeEmEstoque = quantidadeEmEstoque;
     }
 
@@ -58,7 +58,7 @@ public class Produtos {
         }
     }
 
-    public void reposicao (int repor) {
+    public void reposicao(int repor) {
         this.quantidadeEmEstoque += repor;
     }
 }
