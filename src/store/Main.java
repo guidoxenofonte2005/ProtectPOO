@@ -3,16 +3,32 @@ package store;
 import user.accessGranted.Gerente;
 import user.accessGranted.Vendedor;
 import user.client.Cliente;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.util.InputMismatchException;
+import java.io.File;
 
 public class Main {
 
     public static void main(String[] args) {
         // testar criação, leitura e escrita em um arquivo separado para os vendedores, gerente e clientes do sistema
+        try {
+            File contas = new File("contas.txt");
+            if (contas.createNewFile()) {
+                System.out.println("\u001B[32m" + "Banco de contas criado" + "\u001B[0m");
+            }
+            else {
+                System.out.println("\u001B[34m" + "Banco de contas acessado" + "\u001B[0m");
+            }
+        } catch (IOException e) {
+            System.out.println("\u001B[31m" + "Erro no acesso/criação do banco de contas. Finalizando programa..." + "\u001B[0m");
+        }
 
         Scanner scam = new Scanner(System.in);
-        int valor;
+        int valor = 0;
         Loja loja = new Loja(new ArrayList<>());
         boolean continuar = false;
 
@@ -21,12 +37,19 @@ public class Main {
         System.out.println("2 - Login como vendedor");
         System.out.println("3 - Login como gerente");
         System.out.println("<----------------------------->");
-        System.out.print("Digite a sua opção: ");
-        valor = scam.nextInt();
-        scam.nextLine();  // Consumir o restante da linha após nextInt()
+        while (valor < 1 || valor > 3) {
+            System.out.print("Digite a sua opção: ");
+            try {
+                valor = scam.nextInt();
+                scam.nextLine();  // Consumir o restante da linha após nextInt()
+            } catch (InputMismatchException e) {
+                System.out.println("Erro!!! Valor digitado de tipo inválido. Finalizando...");
+                break;
+            }
+        }
 
-        // Login como cliente
         switch (valor) {
+        // Login como cliente
             case 1:
                 String nomeDoCliente;
                 String emailCliente;
