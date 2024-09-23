@@ -58,7 +58,7 @@ public class Produtos {
         }
     }
 
-    public void reposicao (int quantidadeEmEstoque, int repor) {
+    public void reposicao (int repor) {
         this.quantidadeEmEstoque += repor;
     }
 }
