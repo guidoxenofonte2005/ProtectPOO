@@ -1,5 +1,5 @@
-package store;
-
+import store.Loja;
+import store.Produtos;
 import user.accessGranted.Gerente;
 import user.accessGranted.Vendedor;
 import user.client.Cliente;
@@ -87,7 +87,7 @@ public class Main {
             }
             reader = new Scanner(prod);
             while (reader.hasNextLine()) {
-                String[] tempStr = reader.nextLine().split(":");
+                String[] tempStr = reader.nextLine().split(":", 4);
                 Produtos temp = new Produtos(tempStr[0], Double.parseDouble(tempStr[1]), Integer.parseInt(tempStr[2]), Integer.parseInt(tempStr[3]));
                 pr.add(temp);
             }

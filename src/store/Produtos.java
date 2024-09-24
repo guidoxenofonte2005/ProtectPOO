@@ -9,8 +9,8 @@ public class Produtos {
     public Produtos(String nome, double preco, int quantidadeEmEstoque, int quantidadeVendida) {
         this.nome = nome;
         this.preco = preco;
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
-        this.quantidadeEmEstoque = 0;
+        setQuantidadeEmEstoque(quantidadeEmEstoque);
+        this.quantidadeVendida = quantidadeVendida;
     }
 
     //Criando getters para retornar os atributos privados
