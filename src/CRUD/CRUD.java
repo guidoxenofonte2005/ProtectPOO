@@ -1,3 +1,5 @@
+package CRUD;
+
 import java.util.List;
 
 import store.Produtos;
@@ -12,4 +14,12 @@ public class CRUD {
     public List<Vendedor> vendedores;
     public List<Cliente> clientes;
     public Loja loja;
+
+    public CRUD(List<Produtos> p, List<Cliente> c, List<Vendedor> v, List<Gerente> g, Loja l) {
+        this.produtos = p;
+        this.gerentes = g;
+        this.vendedores = v;
+        this.clientes = c;
+        this.loja = l;
+    }
 }
