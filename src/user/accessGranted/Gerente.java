@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Gerente extends Usuario {
 
-    private List <Vendedor> vendedores;
+    private List<Vendedor> vendedores;
 
     public Gerente(String nome, String email) {
         super(nome, email);

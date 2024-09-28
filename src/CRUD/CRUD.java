@@ -13,13 +13,11 @@ public class CRUD {
     public List<Gerente> gerentes;
     public List<Vendedor> vendedores;
     public List<Cliente> clientes;
-    public Loja loja;
 
-    public CRUD(List<Produtos> p, List<Cliente> c, List<Vendedor> v, List<Gerente> g, Loja l) {
+    public CRUD(List<Produtos> p, List<Cliente> c, List<Vendedor> v, List<Gerente> g) {
         this.produtos = p;
         this.gerentes = g;
         this.vendedores = v;
         this.clientes = c;
-        this.loja = l;
     }
 }

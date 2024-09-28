@@ -5,13 +5,12 @@ import user.accessGranted.Vendedor;
 import user.client.Cliente;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
-import java.util.InputMismatchException;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import CRUD.CRUD;
 
@@ -95,7 +94,8 @@ public class Main {
         }
 
         Loja loja = new Loja(new ArrayList<>());
-        CRUD everything = new CRUD(pr, cl, ve, ge, loja);
+        CRUD everything = new CRUD(pr, cl, ve, ge);
+
         boolean prosseguir = true;
         while (prosseguir) {
             System.out.println("<----------------------------->");
@@ -112,7 +112,7 @@ public class Main {
                     scam.nextLine();  // Consumir o restante da linha após nextInt()
                 } catch (InputMismatchException e) {
                     System.out.println("Erro!!! Valor digitado de tipo inválido. Finalizando...");
-                    break;
+                    System.exit(-20);
                 }
             }
 
@@ -123,22 +123,46 @@ public class Main {
                     String emailCliente;
                     int validar = 0;
 
-                    System.out.println("1 - Login com conta existente: ");
-                    System.out.println("2 - Criar conta: ");
+                    System.out.println("1 - Login com conta existente; ");
+                    System.out.println("2 - Criar conta; ");
+                    System.out.println("Digite sua escolha: ");
                     validar = scam.nextInt();
                     scam.nextLine();
 
                     //Login com conta existente
                     if (validar == 1) {
+                        if (everything.clientes.isEmpty()) {
+                            System.out.println("Não existem contas cadastradas no sistema. Por gentileza, crie uma nova conta.");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {}
+                            break;
+                        }
                         // Inserir os dados de login do cliente
                         System.out.print("Digite seu nome: ");
                         nomeDoCliente = scam.nextLine();
                         System.out.print("Digite seu email: ");
                         emailCliente = scam.nextLine();
 
+                        Cliente temp = new Cliente(nomeDoCliente, emailCliente);
+                        int ind = -1;
+                        for (int i = 0; i < everything.clientes.size(); i++) {
+                            if (Objects.equals(everything.clientes.get(i).getNome(), temp.getNome()) && Objects.equals(everything.clientes.get(i).getEmail(), temp.getEmail())) {
+                                ind = i;
+                            }
+                        }
+
+                        Cliente cliente;
+
                         // Criar o objeto cliente com os dados fornecidos
-                        Cliente cliente = new Cliente(nomeDoCliente, emailCliente);
-                        System.out.println("Login feito com sucesso como Cliente!");
+                        if (ind >= 0) {
+                            cliente = everything.clientes.get(ind);
+                            System.out.println("Login feito com sucesso como Cliente!");
+                        }
+                        else {
+                            System.out.println("Elemento não encontrado.");
+                            break;
+                        }
 
                         continuar = true;
                         while (continuar) {
@@ -182,7 +206,6 @@ public class Main {
                             }
                         }
                     }
-
                     else if (validar == 2) {
                         System.out.print("Digite o nome de usuário: ");
                         nomeDoCliente = scam.nextLine();
@@ -190,7 +213,16 @@ public class Main {
                         emailCliente = scam.nextLine();
 
                         Cliente newCliente = Cliente.createProfile(nomeDoCliente, emailCliente);
-                        cl.add (newCliente);
+                        everything.clientes.add(newCliente);
+
+                        try {
+                            FileWriter fw = new FileWriter("contasClientes.txt", true);
+                            fw.write(nomeDoCliente + ":" + emailCliente);
+                            fw.close();
+                        } catch (IOException e) {
+                            System.out.println("Erro ao guardar cliente. Encerrando...");
+                            System.exit(101);
+                        }
 
                         System.out.println("Seja bem-vindo " + nomeDoCliente + "! Agora escolha uma das opções a seguir: ");
                         continuar = true;
@@ -236,6 +268,9 @@ public class Main {
                             }
                         }
                     }
+                    else {
+                        System.out.println("Por favor, digite um número válido.");
+                    }
                     valor = 0;
                     break;
 
@@ -248,9 +283,25 @@ public class Main {
                     nomeDoVendedor = scam.nextLine();
                     System.out.print("Digite seu email: ");
                     emailVendedor = scam.nextLine();
-                    Vendedor vendedor = new Vendedor(nomeDoVendedor, emailVendedor);
 
-                    System.out.println("Login feito com sucesso como Vendedor!");
+                    Vendedor temp = new Vendedor(nomeDoVendedor, emailVendedor);
+                    int ind = -1;
+                    for (int i = 0; i < everything.vendedores.size(); i++) {
+                        if (Objects.equals(everything.vendedores.get(i).getNome(), temp.getNome()) && Objects.equals(everything.vendedores.get(i).getEmail(), temp.getEmail())) {
+                            ind = i;
+                        }
+                    }
+
+                    Vendedor vendedor;
+
+                    if (ind >= 0) {
+                        vendedor = everything.vendedores.get(ind);
+                        System.out.println("Login feito com sucesso como Vendedor!");
+                    }
+                    else {
+                        System.out.println("Vendedor não encontrado.");
+                        break;
+                    }
 
                     continuar = true;
                     while (continuar) {
