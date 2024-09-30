@@ -340,6 +340,7 @@ public class Main {
                     }
                     valor = 0;
                     break;
+
                 // Login como gerente
                 case 3:
                     String nomeDoGerente;
@@ -349,9 +350,25 @@ public class Main {
                     nomeDoGerente = scam.nextLine();
                     System.out.println("Digite seu email: ");
                     emailGerente = scam.nextLine();
-                    Gerente gerente = new Gerente(nomeDoGerente, emailGerente);
 
-                    System.out.println("Login como Gerente feito com sucesso!");
+                    Gerente tempGer = new Gerente(nomeDoGerente, emailGerente);
+                    int indGer = -1;
+                    for (int i = 0; i < everything.gerentes.size(); i++) {
+                        if (Objects.equals(everything.gerentes.get(i).getNome(), tempGer.getNome()) && Objects.equals(everything.gerentes.get(i).getEmail(), tempGer.getEmail())) {
+                            indGer = i;
+                        }
+                    }
+
+                    Gerente gerente;
+
+                    if (indGer >= 0) {
+                        gerente = everything.gerentes.get(indGer);
+                        System.out.println("Login como Gerente feito com sucesso!");
+                    }
+                    else {
+                        System.out.println("Gerente não encontrado.");
+                        break;
+                    }
 
                     continuar = true;
                     while (continuar) {
