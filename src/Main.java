@@ -86,7 +86,8 @@ public class Main {
             reader = new Scanner(prod);
             while (reader.hasNextLine()) {
                 String[] tempStr = reader.nextLine().split(":", 4);
-                Produtos temp = new Produtos(tempStr[0], Double.parseDouble(tempStr[1]), Integer.parseInt(tempStr[2]), Integer.parseInt(tempStr[3]));
+                Produtos temp = new Produtos(tempStr[0], Double.parseDouble(tempStr[1]),
+                        Integer.parseInt(tempStr[2]), Integer.parseInt(tempStr[3])); // nome:preço:estoque:vendidos
                 pr.add(temp);
             }
         } catch (FileNotFoundException e) {

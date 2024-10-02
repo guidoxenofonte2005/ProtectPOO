@@ -1,5 +1,9 @@
 package store;
 
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
+
 public class Produtos {
     private String nome;
     private double preco;
@@ -52,9 +56,18 @@ public class Produtos {
         if (quantidadeVendida <= quantidadeEmEstoque) {
             this.quantidadeVendida += quantidadeVendida;
             this.quantidadeEmEstoque -= quantidadeVendida;
+            try {
+                File prods = new File("produtos.txt");
+                Scanner reader = new Scanner(prods);
+                while (reader.hasNextLine()) {
+                    continue; // mexer nisso dps
+                }
+            } catch (Exception e) {
+                // sla
+            }
         }
         else {
-            System.out.println("Estoque insuficiente para realizar a venda");
+            System.out.println("\u001B[31mEstoque insuficiente para realizar a venda\u001B[m");
         }
     }
 
