@@ -1,10 +1,14 @@
 package user.client;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.Scanner;
 import user.accessGranted.Usuario;
 import store.Loja;
 import store.Produtos;
+
+import CRUD.CRUD;
 
 public class Cliente extends Usuario {
 
@@ -60,8 +64,32 @@ public class Cliente extends Usuario {
         }
     }
 
-    public void deleteAccount (Usuario infoUser) {
+    public void deleteAccount (Usuario infoUser, CRUD crud) {
+        boolean res = crud.clientes.remove(infoUser);
+        if (res) {
+            System.out.println("Conta removida com sucesso.");
+        } else {
+            System.out.println("Conta não encontrada.");
+        }
 
+        try {
+            File client = new File("contasClientes.txt");
+            Scanner reader = new Scanner(client);
+            StringBuffer str = new StringBuffer();
+            while (reader.hasNextLine()) {
+                String temp = reader.nextLine();
+                if (!temp.contains(infoUser.getNome()) && !temp.contains(infoUser.getEmail())) {
+                    str.append(temp);
+                    str.append("\n");
+                }
+            }
+
+            FileWriter fw = new FileWriter("contasClientes.txt", false);
+            fw.write(String.valueOf(str));
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("Erro em alguma coisa aq");
+        }
     }
 
     public static Cliente createProfile (String nome, String email) {

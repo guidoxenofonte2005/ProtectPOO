@@ -199,6 +199,8 @@ public class Main {
                             }
                             else if (valor == 3) {
                                 // Deletar conta
+                                cliente.deleteAccount(cliente, everything);
+                                break;
                             }
                             else if (valor == 4) {
                                 continuar = false;
