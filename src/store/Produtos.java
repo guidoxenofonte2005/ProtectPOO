@@ -59,8 +59,20 @@ public class Produtos {
             try {
                 File prods = new File("produtos.txt");
                 Scanner reader = new Scanner(prods);
+
+                StringBuffer str = new StringBuffer();
+                String temp;
                 while (reader.hasNextLine()) {
-                    continue; // mexer nisso dps
+                    temp = reader.nextLine();
+                    if (!temp.contains(this.getNome()) && !temp.contains(Double.toString(this.getPreco()))
+                            && !temp.contains(Integer.toString(this.getQuantidadeVendida())) &&
+                            !temp.contains(Integer.toString(this.getQuantidadeEmEstoque()))) {
+                        str.append(reader.nextLine());
+                    } else {
+                        str.append(this.getNome()).append(":").append(this.getPreco())
+                                .append(":").append(this.getQuantidadeEmEstoque()).append(":")
+                                .append(this.getQuantidadeVendida());
+                    }
                 }
             } catch (Exception e) {
                 // sla
