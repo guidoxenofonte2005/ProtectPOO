@@ -55,8 +55,6 @@ public class Produtos {
 
     public void registrarVenda (int quantidadeVendida) {
         if (quantidadeVendida <= quantidadeEmEstoque) {
-            this.quantidadeVendida += quantidadeVendida;
-            this.quantidadeEmEstoque -= quantidadeVendida;
             try {
                 File prods = new File("produtos.txt");
                 Scanner reader = new Scanner(prods);
@@ -65,14 +63,14 @@ public class Produtos {
                 String temp;
                 while (reader.hasNextLine()) {
                     temp = reader.nextLine();
-                    if (!temp.contains(this.getNome()) && !temp.contains(Double.toString(this.getPreco()))
-                            && !temp.contains(Integer.toString(this.getQuantidadeVendida())) &&
-                            !temp.contains(Integer.toString(this.getQuantidadeEmEstoque()))) {
-                        str.append(reader.nextLine());
-                    } else {
+                    if (temp.contains(this.getNome()) && temp.contains(Double.toString(this.getPreco()))
+                            && temp.contains(Integer.toString(this.getQuantidadeVendida())) &&
+                            temp.contains(Integer.toString(this.getQuantidadeEmEstoque()))) {
                         str.append(this.getNome()).append(":").append(this.getPreco())
-                                .append(":").append(this.getQuantidadeEmEstoque()).append(":")
-                                .append(this.getQuantidadeVendida());
+                                .append(":").append(this.getQuantidadeEmEstoque() - quantidadeVendida).append(":")
+                                .append(this.getQuantidadeVendida() + quantidadeVendida);
+                    } else {
+                        str.append(temp);
                     }
                     str.append("\n");
                 }
@@ -83,6 +81,8 @@ public class Produtos {
             } catch (Exception e) {
                 // sla
             }
+            this.quantidadeVendida += quantidadeVendida;
+            this.quantidadeEmEstoque -= quantidadeVendida;
         }
         else {
             System.out.println("\u001B[31mEstoque insuficiente para realizar a venda\u001B[m");
