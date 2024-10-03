@@ -37,18 +37,18 @@ public class Cliente extends Usuario {
         System.out.println("Conta criada com sucesso! Seja bem-vindo " + nome);*/
     }
 
-    public void accessProducts(Loja loja) {
-        List<Produtos> produto = loja.getProdutos();
+    public void accessProducts(CRUD crud) {
+        List<Produtos> produto = crud.produtos;
         if (produto.isEmpty()) {
             System.out.println("Não há produtos disponíveis");
         } else {
             System.out.println("Acessando os produtos: ");
+            System.out.println("<----------------------------->");
             for (Produtos produtos : produto) {
-                System.out.println("<----------------------------->");
                 System.out.println("Nome: " +  produtos.getNome() + ", Preço: " + produtos.getPreco()
                         + ", Quantidade em estoque: " + produtos.getQuantidadeEmEstoque());
-                System.out.println("<----------------------------->");
             }
+            System.out.println("<----------------------------->");
         }
     }
 

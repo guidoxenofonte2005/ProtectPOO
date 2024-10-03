@@ -2,6 +2,7 @@ package store;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Produtos {
@@ -73,7 +74,12 @@ public class Produtos {
                                 .append(":").append(this.getQuantidadeEmEstoque()).append(":")
                                 .append(this.getQuantidadeVendida());
                     }
+                    str.append("\n");
                 }
+
+                FileWriter fr = new FileWriter("produtos.txt");
+                fr.write(str.toString());
+                fr.close();
             } catch (Exception e) {
                 // sla
             }

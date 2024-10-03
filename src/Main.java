@@ -179,7 +179,7 @@ public class Main {
 
                             if (valor == 1) {
                                 // Acessar o catálogo de produtos
-                                cliente.accessProducts(loja);
+                                cliente.accessProducts(everything);
                             }
                             else if (valor == 2) {
                                 // Comprar produto
@@ -189,8 +189,16 @@ public class Main {
                                 int quantidade = scam.nextInt();
                                 scam.nextLine();  // Consumir o restante da linha
 
+                                Produtos produtoParaComprar = null;
+
                                 // Buscar produto na loja e realizar a compra
-                                Produtos produtoParaComprar = loja.getProdutoPorNome(nomeProduto);
+                                for (int i = 0; i < everything.produtos.size(); i++) {
+                                    Produtos tempProd = everything.produtos.get(i);
+                                    if (tempProd.getNome().equals(nomeProduto)) {
+                                        produtoParaComprar = tempProd;
+                                        break;
+                                    }
+                                }
                                 if (produtoParaComprar != null) {
                                     cliente.purchaseOption(produtoParaComprar, quantidade);
                                 }
@@ -243,7 +251,7 @@ public class Main {
 
                             if (valor == 1) {
                                 // Acessar o catálogo de produtos
-                                cliente.accessProducts(loja);
+                                cliente.accessProducts(everything);
                             }
                             else if (valor == 2) {
                                 // Comprar produto
